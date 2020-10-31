@@ -1,7 +1,6 @@
 package com.github.salva.kafka.tutorial1;
 
 import java.util.Properties;
-import java.util.concurrent.ExecutionException;
 
 import org.apache.kafka.clients.producer.Callback;
 import org.apache.kafka.clients.producer.KafkaProducer;
@@ -14,7 +13,7 @@ import org.slf4j.LoggerFactory;
 
 public class ProducerDemoWithCallback {
 
-	public static void main(String[] args) throws InterruptedException, ExecutionException {
+	public static void main(String[] args) {
 
 		final Logger logger = LoggerFactory.getLogger(ProducerDemoWithCallback.class);
 
@@ -30,17 +29,9 @@ public class ProducerDemoWithCallback {
 		KafkaProducer<String, String> producer = new KafkaProducer<String, String>(properties);
 
 		for (int i = 0; i < 10; i++) {
-			StringBuilder topic = new StringBuilder("first_topic");
-			StringBuilder value = new StringBuilder("Hello world ");
-			StringBuilder key = new StringBuilder("id_");
-			value.append(i);
-			key.append(i);
-
 			// Create a Producer Record
-			ProducerRecord<String, String> record = new ProducerRecord<String, String>(topic.toString(), key.toString(),
-					value.toString());
-
-			logger.info("Key: " + key);
+			ProducerRecord<String, String> record = new ProducerRecord<String, String>("first_topic",
+					"hello world " + Integer.toString(i));
 
 			// send data
 			producer.send(record, new Callback() {
@@ -56,7 +47,7 @@ public class ProducerDemoWithCallback {
 					}
 
 				}
-			}).get(); // block the send() to make it synchronous - DON'T DO THIS IN PRODUCTION!!
+			});
 		}
 
 		// flush data
