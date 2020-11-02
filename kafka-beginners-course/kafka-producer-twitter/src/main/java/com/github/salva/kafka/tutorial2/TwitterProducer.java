@@ -34,7 +34,7 @@ public class TwitterProducer {
 	private String token = "1322933883969613824-mtBQH1e7nt5U1gi2Ucsd2P0GeiTBIL";
 	private String secret = "RLvtHr5KQJBKkOfyqZ2Wbtxc3kpysP1CRfo76bmbyQaQy";
 
-	List<String> terms = Lists.newArrayList("music", "politics", "covid", "china");
+	List<String> terms = Lists.newArrayList("musicians");
 
 	public TwitterProducer() {
 	}
